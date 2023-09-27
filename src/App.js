@@ -1,9 +1,10 @@
+import React from "react";
+import NavBar from "./components/NavBar/NavBar";
+
 function App() {
   return (
     <div>
-      <header>
-        <p>Initial commit</p>
-      </header>
+      <NavBar />
     </div>
   );
 }
