@@ -4,6 +4,7 @@ import store from "./redux/store";
 import React from "react";
 import NavBar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
+import Login from "./components/Login/Login";
 
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<Profile />} /> */}
+            <Route path="/login" element={<Login />} />
+            {/* <Route path="/profile" element={<Profile />} /> */}
           </Routes>
         </div>
       </Router>
