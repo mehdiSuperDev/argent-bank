@@ -1,5 +1,7 @@
 import React from "react";
 import "./Login.css";
+import { Link } from "react-router-dom";
+
 function Login() {
   return (
     <main className="main bg-dark">
@@ -23,11 +25,9 @@ function Login() {
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          {/* <!-- PLACEHOLDER DUE TO STATIC SITE -->
-            <a href="./user.html" className="sign-in-button">Sign In</a>
-            <!-- SHOULD BE THE BUTTON BELOW -->
-            <!-- <button className="sign-in-button">Sign In</button> -->
-            <!--  --> */}
+          <Link to="/profile">
+            <button className="sign-in-button">Sign In</button>
+          </Link>
         </form>
       </section>
     </main>
