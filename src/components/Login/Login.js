@@ -31,10 +31,9 @@ function Login() {
 
   useEffect(() => {
     if (authState.isAuthenticated) {
-      navigate("/profile");
       localStorage.setItem("jwt", authState.token);
     }
-  }, [authState.isAuthenticated, authState.token, navigate]);
+  }, [authState.isAuthenticated, authState.token]);
 
   return (
     <main className="main bg-dark">

@@ -20,14 +20,27 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
       state.token = null;
+
+      state.loading = false;
+      state.error = null;
+      // Supprimez le token du localStorage
+      localStorage.removeItem("jwt");
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action) => {
-        state.isAuthenticated = true;
-        state.token = action.payload.token;
-        state.user = action.payload.user;
+        console.log("*** ACTION LOGIN", action); // pour voir la structure de l'action
+        if (action.payload && action.payload.token) {
+          state.isAuthenticated = true;
+          state.token = action.payload.token;
+          state.user = action.payload.user;
+        } else {
+          console.error(
+            "Unexpected format of the login response",
+            action.payload
+          );
+        }
       })
       .addCase(signUp.fulfilled, (state, action) => {
         console.log("FULLFILLED");

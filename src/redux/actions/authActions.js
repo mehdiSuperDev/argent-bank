@@ -4,10 +4,14 @@ import api from "../../services/api";
 export const login = createAsyncThunk("auth/login", async (credentials, _) => {
   try {
     const response = await api.post("/user/login", credentials);
-    return { token: response.data.token, user: { email: credentials.email } };
+    if (response.data && response.data.body && response.data.body.token) {
+      return {
+        token: response.data.body.token,
+        user: { email: credentials.email },
+      };
+    }
   } catch (error) {
     console.error(error);
-    throw error;
   }
 });
 
@@ -29,7 +33,7 @@ export const getProfile = createAsyncThunk(
   async (_, thunkAPI) => {
     const token = thunkAPI.getState().auth.token;
     try {
-      const response = await api.get("/user/profile", {
+      const response = await api.post("/user/profile", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
