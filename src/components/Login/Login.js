@@ -1,23 +1,64 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login } from "../../redux/actions/authActions";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const authState = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const email = e.target.username.value;
+    const password = e.target.password.value;
+
+    try {
+      const actionResult = await dispatch(login({ email, password }));
+      if (actionResult.type === login.fulfilled.type) {
+        navigate("/profile");
+      } else {
+        console.error("Invalid credentials");
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (authState.isAuthenticated) {
+      navigate("/profile");
+      localStorage.setItem("jwt", authState.token);
+    }
+  }, [authState.isAuthenticated, authState.token, navigate]);
+
   return (
     <main className="main bg-dark">
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="input-wrapper">
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" autoComplete="username" />
+            <input
+              type="text"
+              id="username"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="username"
+            />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
             />
           </div>
@@ -25,9 +66,9 @@ function Login() {
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          <Link to="/profile">
-            <button className="sign-in-button">Sign In</button>
-          </Link>
+          <button type="submit" className="sign-in-button">
+            Sign In
+          </button>
         </form>
       </section>
     </main>
