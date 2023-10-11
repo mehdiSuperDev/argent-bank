@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
+import Footer from "./components/Footer/Footer";
 import { setUserToken, getProfile } from "./redux/actions/authActions";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -30,6 +31,7 @@ function InitializeApp() {
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );
