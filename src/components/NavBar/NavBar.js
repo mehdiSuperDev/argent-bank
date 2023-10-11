@@ -15,6 +15,7 @@ function NavBar() {
 
   const handleSignOut = () => {
     dispatch(logout());
+    localStorage.removeItem("jwt");
     navigate("/");
   };
 
@@ -38,11 +39,9 @@ function NavBar() {
         {isAuthenticated ? (
           <>
             <span>{user.firstName}</span>
-            <Link className="main-nav-item" to="/logout">
-              <button className="fa fa-user-circle" onClick={handleSignOut}>
-                Sign out
-              </button>
-            </Link>
+            <button className="fa fa-user-circle" onClick={handleSignOut}>
+              Sign out
+            </button>
           </>
         ) : (
           <Link className="main-nav-item" to="/login">
