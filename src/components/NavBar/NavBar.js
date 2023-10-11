@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../redux/reducers/authReducer";
 import { getProfile } from "../../redux/actions/authActions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {
   const user = useSelector((state) => state.auth.user);
@@ -38,14 +40,20 @@ function NavBar() {
       <div>
         {isAuthenticated ? (
           <>
-            <span>{user?.firstName}</span>
-            <button className="fa fa-user-circle" onClick={handleSignOut}>
+            <FontAwesomeIcon icon={faUserCircle} />
+            <span className="main-nav-item">{user?.firstName}</span>
+            <span
+              role="button"
+              className="main-nav-item"
+              onClick={handleSignOut}
+              style={{ cursor: "pointer" }}
+            >
               Sign out
-            </button>
+            </span>
           </>
         ) : (
           <Link className="main-nav-item" to="/login">
-            <i className="fa fa-user-circle"></i>
+            <FontAwesomeIcon icon={faUserCircle} />
             Sign In
           </Link>
         )}

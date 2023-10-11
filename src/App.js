@@ -23,7 +23,7 @@ function InitializeApp() {
 
   return (
     <Router>
-      <div>
+      <div className="container">
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
