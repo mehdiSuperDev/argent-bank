@@ -1,30 +1,30 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "http://localhost:3001",
-  timeout: 10000,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+const API_URL = "http://localhost:3001/user";
 
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-    if (
-      token &&
-      !(
-        config.url.endsWith("/user/login") ||
-        config.url.endsWith("/user/signup")
-      )
-    ) {
-      config.headers["Authorization"] = "Bearer " + token;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+export const login = (email, password) => {
+  return axios.post(`${API_URL}/login`, { email, password });
+};
 
-export default api;
+export const signup = (email, password, firstName, lastName) => {
+  return axios.post(`${API_URL}/signup`, {
+    email,
+    password,
+    firstName,
+    lastName,
+  });
+};
+
+export const fetchProfile = (token) => {
+  return axios.get(`${API_URL}/profile`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+
+export const updateProfile = (token, firstName, lastName) => {
+  return axios.put(
+    `${API_URL}/profile`,
+    { firstName, lastName },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+};
