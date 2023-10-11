@@ -3,8 +3,13 @@ import "./Login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../redux/actions/authActions";
+import useConditionalRedirect from "../../hooks/useConditionalRedirect";
 
 function Login() {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  // Redirige vers le profil si déjà authentifié
+  useConditionalRedirect(isAuthenticated, "/profile");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const authState = useSelector((state) => state.auth);

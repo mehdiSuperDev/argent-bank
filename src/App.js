@@ -6,20 +6,39 @@ import NavBar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
+import { setUserToken, getProfile } from "./redux/actions/authActions";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
+function InitializeApp() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      dispatch(setUserToken(token));
+      dispatch(getProfile());
+    }
+  }, [dispatch]);
+
+  return (
+    <Router>
+      <div>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
 
 function App() {
   return (
     <Provider store={store}>
-      <Router>
-        <div>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<Profile />} />
-          </Routes>
-        </div>
-      </Router>
+      <InitializeApp />
     </Provider>
   );
 }

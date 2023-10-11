@@ -20,7 +20,7 @@ function NavBar() {
   };
 
   React.useEffect(() => {
-    if (isAuthenticated && !user.firstName) {
+    if (isAuthenticated && user && !user.firstName) {
       dispatch(getProfile());
     }
   }, [isAuthenticated, user, dispatch]);
@@ -38,7 +38,7 @@ function NavBar() {
       <div>
         {isAuthenticated ? (
           <>
-            <span>{user.firstName}</span>
+            <span>{user?.firstName}</span>
             <button className="fa fa-user-circle" onClick={handleSignOut}>
               Sign out
             </button>

@@ -3,8 +3,13 @@ import "./Profile.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile, updateProfile } from "../../redux/actions/authActions";
+import useConditionalRedirect from "../../hooks/useConditionalRedirect";
 
 function Profile() {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  // Redirige vers la connexion si non authentifié
+  useConditionalRedirect(!isAuthenticated, "/login");
+
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [isEditing, setIsEditing] = useState(false);

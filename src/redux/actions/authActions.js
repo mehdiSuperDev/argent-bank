@@ -64,4 +64,12 @@ export const updateProfile = createAsyncThunk(
   }
 );
 
-//Test git commit
+export const setUserToken = createAsyncThunk(
+  "auth/setUserToken",
+  async (token, thunkAPI) => {
+    thunkAPI.dispatch({
+      type: "auth/setUserToken",
+      payload: token,
+    });
+  }
+);

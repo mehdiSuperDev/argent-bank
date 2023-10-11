@@ -6,12 +6,14 @@ import {
   updateProfile,
 } from "../actions/authActions";
 
+const tokenFromStorage = localStorage.getItem("jwt");
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    isAuthenticated: false,
+    isAuthenticated: tokenFromStorage ? true : false,
     user: null,
-    token: null,
+    token: tokenFromStorage,
     loading: false,
     error: null,
   },
@@ -26,6 +28,9 @@ const authSlice = createSlice({
       // Supprimez le token du localStorage
       localStorage.removeItem("jwt");
     },
+    setUserToken: (state, action) => {
+      state.token = action.payload; // définit le token
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -35,6 +40,10 @@ const authSlice = createSlice({
           state.isAuthenticated = true;
           state.token = action.payload.token;
           state.user = action.payload.user;
+
+          if (action.payload && action.payload.token) {
+            localStorage.setItem("jwt", action.payload.token);
+          }
         } else {
           console.error(
             "Unexpected format of the login response",
