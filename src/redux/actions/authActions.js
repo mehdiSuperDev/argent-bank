@@ -5,6 +5,7 @@ export const login = createAsyncThunk("auth/login", async (credentials, _) => {
   try {
     const response = await api.post("/user/login", credentials);
     if (response.data && response.data.body && response.data.body.token) {
+      localStorage.setItem("jwt", response.data.body.token);
       return {
         token: response.data.body.token,
         user: { email: credentials.email },
@@ -12,6 +13,7 @@ export const login = createAsyncThunk("auth/login", async (credentials, _) => {
     }
   } catch (error) {
     console.error(error);
+    throw error; // rethrow l'erreur pour la capturer plus tard dans un composant
   }
 });
 
@@ -20,7 +22,7 @@ export const signUp = createAsyncThunk(
   async (userDetails, _) => {
     try {
       const response = await api.post("/user/signup", userDetails);
-      return response.data.body; // {id, email}
+      return response.data.body;
     } catch (error) {
       console.error(error);
       throw error;
@@ -38,7 +40,7 @@ export const getProfile = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-      return response.data.body; // {id, email}
+      return response.data.body;
     } catch (error) {
       console.error(error);
       throw error;
@@ -56,7 +58,7 @@ export const updateProfile = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-      return response.data.body; // {id, email}
+      return response.data.body;
     } catch (error) {
       console.error(error);
       throw error;

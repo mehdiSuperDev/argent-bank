@@ -17,13 +17,13 @@ function Profile() {
   const [lastName, setLastName] = useState("");
 
   useEffect(() => {
-    if (!user) {
+    if (!user && isAuthenticated) {
       dispatch(getProfile());
-    } else {
+    } else if (user) {
       setFirstName(user.firstName);
       setLastName(user.lastName);
     }
-  }, [user, dispatch]);
+  }, [user, dispatch, isAuthenticated]);
 
   const handleEditClick = () => {
     setIsEditing(true);
