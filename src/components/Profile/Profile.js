@@ -56,20 +56,30 @@ function Profile() {
       </div>
       {isEditing && (
         <div>
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            placeholder="First Name"
-          />
-          <input
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            placeholder="Last Name"
-          />
-          <button onClick={handleSave}>Save</button>
-          <button onClick={handleCancel}>Cancel</button>
+          <div className="form-edit">
+            <input
+              className="form-input"
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="First Name"
+            />
+            <input
+              className="form-input"
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder="Last Name"
+            />
+          </div>
+          <div className="form-edit">
+            <button className="form-button" onClick={handleSave}>
+              Save
+            </button>
+            <button className="form-button" onClick={handleCancel}>
+              Cancel
+            </button>
+          </div>
         </div>
       )}
       <h2 className="sr-only">Accounts</h2>

@@ -59,6 +59,31 @@
     background-color: #00bc77;
     color: #fff;
   }
+
+  .form-edit {
+      display: flex;
+      justify-content: center;
+      margin: auto;
+  }
+
+  .form-input {
+    border: 2px solid #d3d3d3;
+    border-radius: 3px;
+    height: 35px;
+    margin: 7px 7px 5px;
+    text-indent: 10px;
+    width: 180px;
+}
+
+.form-button {
+  border: 2px solid #c3c3f3;
+  border-radius: 3px;
+  color: #6456f5;
+  font-weight: 700;
+  height: 30px;
+  margin: 7px;
+  width: 120px;
+}
   
   @media (min-width: 720px) {
     .account {
