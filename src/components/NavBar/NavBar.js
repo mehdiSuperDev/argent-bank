@@ -40,7 +40,9 @@ function NavBar() {
         {isAuthenticated ? (
           <>
             <FontAwesomeIcon icon={faUserCircle} className="main-nav-item" />
-            <span className="main-nav-item">{user?.firstName}</span>
+            <Link to="/profile">
+              <span className="main-nav-item">{user?.firstName}</span>
+            </Link>
             <span
               role="button"
               className="main-nav-item"
