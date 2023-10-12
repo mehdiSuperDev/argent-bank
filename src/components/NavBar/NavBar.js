@@ -17,7 +17,6 @@ function NavBar() {
 
   const handleSignOut = () => {
     dispatch(logout());
-    localStorage.removeItem("jwt");
     navigate("/");
   };
 

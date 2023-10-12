@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,6 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const authState = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -34,11 +33,11 @@ function Login() {
     }
   };
 
-  useEffect(() => {
-    if (authState.isAuthenticated) {
-      localStorage.setItem("jwt", authState.token);
-    }
-  }, [authState.isAuthenticated, authState.token]);
+  // useEffect(() => {
+  //   if (authState.isAuthenticated) {
+  //     localStorage.setItem("jwt", authState.token);
+  //   }
+  // }, [authState.isAuthenticated, authState.token]);
 
   return (
     <main className="main bg-dark">
