@@ -40,21 +40,22 @@ function NavBar() {
       <div>
         {isAuthenticated ? (
           <>
-            <FontAwesomeIcon icon={faUserCircle} />
+            <FontAwesomeIcon icon={faUserCircle} className="main-nav-item" />
             <span className="main-nav-item">{user?.firstName}</span>
             <span
               role="button"
               className="main-nav-item"
               onClick={handleSignOut}
-              style={{ cursor: "pointer" }}
             >
               Sign out
             </span>
           </>
         ) : (
-          <Link className="main-nav-item" to="/login">
-            <FontAwesomeIcon icon={faUserCircle} />
-            Sign In
+          <Link to="/login">
+            <FontAwesomeIcon icon={faUserCircle} className="main-nav-item" />
+            <span role="button" className="main-nav-item">
+              Sign In
+            </span>
           </Link>
         )}
       </div>

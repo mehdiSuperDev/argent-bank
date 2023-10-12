@@ -6,6 +6,7 @@
   }
   
   .main-nav a {
+    text-decoration: none;
     font-weight: bold;
     color: #2c3e50;
   }
@@ -15,9 +16,11 @@
   }
   
   .main-nav-item {
-    text-decoration: none;
     margin-right: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
   }
+  
   
   .main-nav-item:hover {
     text-decoration: underline;
