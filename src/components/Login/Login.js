@@ -33,12 +33,6 @@ function Login() {
     }
   };
 
-  // useEffect(() => {
-  //   if (authState.isAuthenticated) {
-  //     localStorage.setItem("jwt", authState.token);
-  //   }
-  // }, [authState.isAuthenticated, authState.token]);
-
   return (
     <main className="main bg-dark">
       <section className="sign-in-content">
